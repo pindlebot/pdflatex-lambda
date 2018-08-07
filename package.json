@@ -1,0 +1,13 @@
+{
+  "name": "pdflatex-lambda",
+  "version": "0.0.3",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {},
+  "dependencies": {
+    "unzipper": "^0.9.2"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.287.0"
+  }
+}
