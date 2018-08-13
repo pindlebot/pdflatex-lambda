@@ -20,7 +20,11 @@ function isInstalled () {
   })
 }
 
-module.exports = async () => {
+const SIZE = 169353706
+
+const format = (progress) => parseInt((progress / SIZE) * 100)
+
+module.exports = async (update) => {
   const installed = await isInstalled()
   if (!installed) {
     const s3 = new AWS.S3({ region: 'us-east-1' })
@@ -33,6 +37,18 @@ module.exports = async () => {
       .on('error', console.log.bind(console))
 
     zip.pipe(unzipper.Extract({ path: '/tmp' }))
+    let progress = 0
+    if (update) {
+      zip.on('data', (buffer) => {
+        let tmp = Number(progress)
+        progress += buffer.length
+        let formattedProgress = format(progress)
+        if (format(tmp) !== formattedProgress) {
+          update(formattedProgress)
+        }
+      })
+    }
+
     await new Promise((resolve, reject) => {
       zip.on('end', resolve)
     })
