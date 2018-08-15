@@ -5,9 +5,8 @@
   "license": "MIT",
   "scripts": {},
   "dependencies": {
+    "got": "^9.0.0",
     "unzipper": "^0.9.2"
   },
-  "devDependencies": {
-    "aws-sdk": "^2.287.0"
-  }
+  "devDependencies": {}
 }
