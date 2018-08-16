@@ -23,7 +23,7 @@ const SIZE = 169353706
 
 const format = (progress) => parseInt((progress / SIZE) * 100)
 
-module.exports = async (callback) => {
+module.exports = async (callback, options = {}) => {
   const installed = await isInstalled()
   if (!installed) {
     const zip = unzipper.Extract({ path: '/tmp' })
